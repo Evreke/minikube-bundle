@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: template-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: template-service
+  ports:
+    - port: 8080
+      targetPort: 8080

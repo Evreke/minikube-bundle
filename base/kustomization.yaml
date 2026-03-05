@@ -1,0 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - postgres/deployment.yaml
+  - postgres/service.yaml
+  - prometheus/configmap.yaml
+  - prometheus/deployment.yaml
+  - prometheus/service.yaml
+  - grafana/configmap.yaml
+  - grafana/deployment.yaml
+  - grafana/service.yaml
+  - loki/deployment.yaml
+  - loki/service.yaml
+  - kafka/deployment.yaml
+  - kafka/service.yaml
+  - artemis/configmap.yaml
+  - artemis/deployment.yaml
+  - artemis/service.yaml
+  - template-service/promtail-configmap.yaml
+  - template-service/deployment.yaml
+  - template-service/service.yaml

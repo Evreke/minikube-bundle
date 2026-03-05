@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: artemis-broker-config
+data:
+  broker.xml: |
+    <?xml version="1.0" encoding="utf-8"?>
+    <broker xmlns="http://activemq.org/schema">
+      <name>artemis-broker</name>
+      <addresses>
+        <address name="user.queue">
+          <multicast>
+            <queue name="user.created">
+              <durable>true</durable>
+            </queue>
+          </multicast>
+        </address>
+        <address name="order.queue">
+          <multicast>
+            <queue name="order.processed">
+              <durable>true</durable>
+            </queue>
+          </multicast>
+        </address>
+        <address name="notification.queue">
+          <multicast>
+            <queue name="notification.sent">
+              <durable>true</durable>
+            </queue>
+          </multicast>
+        </address>
+      </addresses>
+    </broker>

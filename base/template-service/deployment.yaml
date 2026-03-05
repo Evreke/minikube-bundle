@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: template-service
+  labels:
+    app: template-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: template-service
+  template:
+    metadata:
+      labels:
+        app: template-service
+    spec:
+      containers:
+        - name: template-service
+          image: nginx:alpine
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: logs
+              mountPath: /var/log/nginx
+        - name: promtail
+          image: grafana/promtail:latest
+          args:
+            - --config.file=/etc/promtail/promtail.yml
+          volumeMounts:
+            - name: promtail-config
+              mountPath: /etc/promtail
+            - name: logs
+              mountPath: /logs
+              readOnly: true
+      volumes:
+        - name: logs
+          emptyDir: {}
+        - name: promtail-config
+          configMap:
+            name: promtail-config

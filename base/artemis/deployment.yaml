@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: artemis
+  labels:
+    app: artemis
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: artemis
+  template:
+    metadata:
+      labels:
+        app: artemis
+    spec:
+      containers:
+        - name: artemis
+          image: apache/activemq-artemis:latest
+          ports:
+            - containerPort: 8161
+            - containerPort: 61616
+          env:
+            - name: ARTEMIS_USERNAME
+              value: artemis
+            - name: ARTEMIS_PASSWORD
+              value: artemis
+            - name: ARTEMIS_CONFIG_ADVERTISED_URL
+              value: http://artemis:8161
+          volumeMounts:
+            - name: broker-config
+              mountPath: /var/lib/artemis/etc/broker.xml
+              subPath: broker.xml
+      volumes:
+        - name: broker-config
+          configMap:
+            name: artemis-broker-config
