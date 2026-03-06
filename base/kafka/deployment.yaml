@@ -47,6 +47,13 @@ spec:
           volumeMounts:
             - name: kafka-data
               mountPath: /var/lib/kafka/data
+        - name: kafka-exporter
+          image: danielqsj/kafka-exporter:latest
+          ports:
+            - containerPort: 9308
+          env:
+            - name: KAFKA_BROKER
+              value: "localhost:9092"
       volumes:
         - name: kafka-data
           emptyDir: {}
