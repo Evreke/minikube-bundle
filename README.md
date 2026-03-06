@@ -91,3 +91,13 @@ minikube-bundle/
 ```bash
 kubectl apply -k minikube-bundle/overlays/minikube/
 ```
+
+## Dashboards
+
+Grafana comes pre-configured with dashboards for:
+
+- **Kafka**: Shows broker, topic, and consumer group metrics
+- **PostgreSQL**: Database connections, queries, locks, performance
+- **ArtemisMQ**: Queue metrics, message rates, consumer statistics
+
+Dashboards are auto-provisioned from `base/grafana/dashboards/`.
