@@ -14,3 +14,12 @@ data:
         static_configs:
           - targets: ['template-service:8080']
         metrics_path: /actuator/prometheus
+      - job_name: 'kafka-exporter'
+        static_configs:
+          - targets: ['kafka:9308']
+      - job_name: 'postgres-exporter'
+        static_configs:
+          - targets: ['postgres:9187']
+      - job_name: 'artemis-exporter'
+        static_configs:
+          - targets: ['artemis:9404']
