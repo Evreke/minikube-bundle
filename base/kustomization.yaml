@@ -24,9 +24,5 @@ resources:
   - kafka-exporter/service.yaml
   - postgres-exporter/deployment.yaml
   - postgres-exporter/service.yaml
-
-configMapGenerator:
-  - name: grafana-dashboards
-    files:
-      - grafana/dashboards/kafka.json
-      - grafana/dashboards/postgres.json
+  - grafana/dashboards-configmap.yaml
+  - artemis/exporter-configmap.yaml
