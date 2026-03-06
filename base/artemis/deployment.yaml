@@ -31,7 +31,20 @@ spec:
             - name: broker-config
               mountPath: /var/lib/artemis/etc/broker.xml
               subPath: broker.xml
+        - name: artemis-exporter
+          image: quay.io/brancz/jmx-exporter:latest
+          ports:
+            - containerPort: 9404
+          volumeMounts:
+            - name: jmx-config
+              mountPath: /config.yaml
+              subPath: config.yaml
+          args:
+            - "/config.yaml"
       volumes:
         - name: broker-config
           configMap:
             name: artemis-broker-config
+        - name: jmx-config
+          configMap:
+            name: artemis-jmx-config
