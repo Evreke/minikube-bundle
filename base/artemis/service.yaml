@@ -13,3 +13,6 @@ spec:
     - name: amqp
       port: 61616
       targetPort: 61616
+    - name: exporter
+      port: 9404
+      targetPort: 9404
