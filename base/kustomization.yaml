@@ -22,3 +22,5 @@ resources:
   - template-service/service.yaml
   - kafka-exporter/deployment.yaml
   - kafka-exporter/service.yaml
+  - postgres-exporter/deployment.yaml
+  - postgres-exporter/service.yaml
