@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: artemis-jmx-config
+data:
+  config.yaml: |
+    startDelaySeconds: 0
+    hostPort: 9404
+    rules:
+      - pattern: 'org.apache.activemq.artemis<type=Broker>([^<]+)<>(CurrentDateFormat|CriticalAnalyzer|MessageCounterEnabled|MessageCounterMaxDayCount|MessageCounterSamplePeriod|Version)<>([^:]+)'
+        name: artemis_broker_$3_$4
+        type: GAUGE
+      - pattern: 'org.apache.activemq.artemis<type=Broker, subType=([^>]+)><>([^:]+)'
+        name: artemis_broker_$2
+        type: GAUGE
+      - pattern: 'org.apache.activemq.artemis<type=Queue, address=([^,]+), queue=([^>]+)><>(ConsumerCount|DeliveringCount|Durable|MessagesAcked|MessagesAdded|MessagesExpired|MessagesKilled|Paused|ScheduledCount|Temporary)<>([^:]+)'
+        name: artemis_queue_$3_$4
+        labels:
+          address: $1
+          queue: $2
+        type: GAUGE
