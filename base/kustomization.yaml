@@ -20,3 +20,5 @@ resources:
   - template-service/promtail-configmap.yaml
   - template-service/deployment.yaml
   - template-service/service.yaml
+  - kafka-exporter/deployment.yaml
+  - kafka-exporter/service.yaml
