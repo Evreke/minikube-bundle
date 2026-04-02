@@ -12,6 +12,9 @@ data:
         <acceptor name="amqp">tcp://0.0.0.0:61616?protocols=AMQP</acceptor>
         <acceptor name="http">tcp://0.0.0.0:8161?httpEnabled=true</acceptor>
       </acceptors>
+      <destinationInterceptors>
+        <mirroredQueue copyMessage = "true" postfix=".qmirror" prefix=""/>
+      </destinationInterceptors>
       <address-settings>
         <address-setting match="#">
           <auto-create-queues>true</auto-create-queues>

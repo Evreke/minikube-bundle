@@ -12,6 +12,7 @@ Kubernetes bundle for local development with observability stack and message bro
 | Loki | 3100 | grafana/loki:3.2.0 |
 | Kafka (KRaft) | 9092 | apache/kafka:latest |
 | ArtemisMQ | 8161 (console), 61616 (AMQP) | apache/activemq-artemis:latest |
+| kafka-ui | 8081 | provectuslabs/kafka-ui:latest |
 | template-service | 8080 | nginx:alpine |
 
 ## Quick Start
@@ -47,13 +48,32 @@ After running `minikube tunnel`, services are accessible at:
 - Kafka: `<EXTERNAL-IP>:9092`
 - ArtemisMQ Console: `<EXTERNAL-IP>:8161` (artemis/artemis)
 - ArtemisMQ AMQP: `<EXTERNAL-IP>:61616`
+- kafka-ui: `<EXTERNAL-IP>:8081`
 - template-service: `<EXTERNAL-IP>:8080`
 
-### Delete
+### Kafka UI
+
+kafka-ui provides a web-based interface for managing Kafka clusters:
 
 ```bash
-kubectl delete -k minikube-bundle/base/
+# Access Kafka UI
+EXTERNAL_IP=$(kubectl get svc kafka-ui -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+open http://$EXTERNAL_IP:8081
 ```
+
+**Features:**
+- View and manage Kafka topics
+- Browse messages in topics
+- Monitor consumer groups and lag
+- Create and delete topics dynamically
+- View broker and cluster information
+
+**Configuration:**
+- Pre-configured to connect to `kafka:9092`
+- Static configuration via environment variables
+- No authentication required for local development
+
+For detailed usage, see [KAFKA_UI.md](KAFKA_UI.md)
 
 ## Project Structure
 
@@ -66,6 +86,7 @@ minikube-bundle/
 │   ├── grafana/
 │   ├── loki/
 │   ├── kafka/
+│   ├── kafka-ui/
 │   ├── artemis/
 │   └── template-service/
 └── overlays/                # Environment overlays

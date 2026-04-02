@@ -22,6 +22,8 @@ resources:
   - template-service/service.yaml
   - integration-demo/deployment.yaml
   - integration-demo/service.yaml
+  - kafka-ui/deployment.yaml
+  - kafka-ui/service.yaml
   - grafana/dashboards-configmap.yaml
   - artemis/exporter-configmap.yaml
 
