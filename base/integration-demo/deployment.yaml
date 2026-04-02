@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: integration-demo
+  labels:
+    app: integration-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: integration-demo
+  template:
+    metadata:
+      labels:
+        app: integration-demo
+    spec:
+      containers:
+        - name: integration-demo
+          image: integration-demo:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8080
+              name: http
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgres:5432/postgres
+            - name: SPRING_DATASOURCE_USERNAME
+              value: postgres
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: postgres
+            - name: SPRING_ARTEMIS_HOST
+              value: artemis
+            - name: SPRING_ARTEMIS_PORT
+              value: "61616"
+            - name: SPRING_ARTEMIS_USER
+              value: artemis
+            - name: SPRING_ARTEMIS_PASSWORD
+              value: artemis
+            - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+              value: kafka:9092

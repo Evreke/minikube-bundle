@@ -5,33 +5,19 @@ metadata:
 data:
   broker.xml: |
     <?xml version="1.0" encoding="utf-8"?>
-     <broker xmlns="http://activemq.org/schema">
-       <name>artemis-broker</name>
-       <jmx xmlns="http://activemq.org/schema">
-         <management-enabled>true</management-enabled>
-         <management-rmi-hostname>localhost</management-rmi-hostname>
-         <management-rmi-port>1099</management-rmi-port>
-       </jmx>
-       <addresses>
-         <address name="user.queue">
-           <multicast>
-             <queue name="user.created">
-               <durable>true</durable>
-             </queue>
-           </multicast>
-         </address>
-         <address name="order.queue">
-           <multicast>
-             <queue name="order.processed">
-               <durable>true</durable>
-             </queue>
-           </multicast>
-         </address>
-         <address name="notification.queue">
-           <multicast>
-             <queue name="notification.sent">
-               <durable>true</durable>
-             </queue>
-           </multicast>
-         </address>
-       </broker>
+    <broker xmlns="http://activemq.apache.org/schema/artemis/broker">
+      <name>artemis-broker</name>
+      <jmx-management-enabled>true</jmx-management-enabled>
+      <acceptors>
+        <acceptor name="amqp">tcp://0.0.0.0:61616?protocols=AMQP</acceptor>
+        <acceptor name="http">tcp://0.0.0.0:8161?httpEnabled=true</acceptor>
+      </acceptors>
+      <address-settings>
+        <address-setting match="#">
+          <auto-create-queues>true</auto-create-queues>
+          <auto-create-addresses>true</auto-create-addresses>
+          <default-queue-routing-type>ANYCAST</default-queue-routing-type>
+          <default-address-routing-type>ANYCAST</default-address-routing-type>
+        </address-setting>
+      </address-settings>
+    </broker>

@@ -20,9 +20,14 @@ resources:
   - template-service/promtail-configmap.yaml
   - template-service/deployment.yaml
   - template-service/service.yaml
-  - kafka-exporter/deployment.yaml
-  - kafka-exporter/service.yaml
-  - postgres-exporter/deployment.yaml
-  - postgres-exporter/service.yaml
+  - integration-demo/deployment.yaml
+  - integration-demo/service.yaml
   - grafana/dashboards-configmap.yaml
   - artemis/exporter-configmap.yaml
+
+configMapGenerator:
+  - name: grafana-dashboards
+    behavior: replace
+    files:
+      - kafka.json=grafana/dashboards/kafka.json
+      - postgres.json=grafana/dashboards/postgres.json

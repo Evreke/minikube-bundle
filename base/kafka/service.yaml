@@ -7,7 +7,9 @@ spec:
   selector:
     app: kafka
   ports:
-    - port: 9092
+    - name: client
+      port: 9092
       targetPort: 9092
-    - port: 9308
+    - name: exporter
+      port: 9308
       targetPort: 9308

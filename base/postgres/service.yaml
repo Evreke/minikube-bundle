@@ -7,7 +7,9 @@ spec:
   selector:
     app: postgres
   ports:
-    - port: 5432
+    - name: db
+      port: 5432
       targetPort: 5432
-    - port: 9187
+    - name: exporter
+      port: 9187
       targetPort: 9187

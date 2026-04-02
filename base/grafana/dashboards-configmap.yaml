@@ -3,10 +3,3 @@ kind: ConfigMap
 metadata:
   name: grafana-dashboards
 data:
-  kafka.json: |
-    {{ .Files.Get "dashboards/kafka.json" | indent 4 }}
-  postgres.json: |
-    {{ .Files.Get "dashboards/postgres.json" | indent 4 }}
-  artemis.json: |
-    {{ .Files.Get "dashboards/artemis.json" | indent 4 }}
-EOF
